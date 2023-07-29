@@ -65,7 +65,6 @@ public class CounterTop : MonoBehaviour
 
     public void DeleteHeldItem()
     {
-        //Debug.Log($"Destroy: {itemOnCounter.name}");
         Destroy(itemOnCounter);
         itemOnCounter = null;
     }

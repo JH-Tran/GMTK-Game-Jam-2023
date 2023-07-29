@@ -180,7 +180,7 @@ public class GoalManager : MonoBehaviour
         }
         else if (screenSide == ScreenSide.Left)
         {
-            leftPromptsText.text = completedSentences[ranNum];
+            leftPromptsText.text = completedSentences[ranNum]; 
             gameTimeLeft = maxTimeValue;
         }
         else if (screenSide == ScreenSide.Right)
