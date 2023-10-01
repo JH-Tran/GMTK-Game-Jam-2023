@@ -6,7 +6,7 @@ public class CanvasMachine: Machine
 {
     [SerializeField] private GameObject pictureCanvas;
 
-    public override void UseMachine(PlayerInfomation player)
+    public override void PlaceDropItem(PlayerInfomation player)
     {
         Debug.Log("Use Canvas Machine");
         if (!player.IsHoldingItem())
@@ -14,5 +14,4 @@ public class CanvasMachine: Machine
             player.HoldItem(Instantiate(pictureCanvas, new Vector3(0, 0, 0), player.transform.rotation));
         }
     }
-    public override void PlaceDropItem(PlayerInfomation player) { }
 }

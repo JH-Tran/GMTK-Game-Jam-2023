@@ -29,6 +29,7 @@ public class GoalManager : MonoBehaviour
     [SerializeField] private TMP_Text imageCompletedText;
     [SerializeField] int completedImages = 0;
     [SerializeField] int currentImageGoal = 10;
+    private float textWaitTime = 5;
     //10, 20, 40, 64
     [SerializeField] int imageGoal1 = 10;
     [SerializeField] int imageGoal2 = 30;
@@ -67,6 +68,7 @@ public class GoalManager : MonoBehaviour
     private bool endGame = false;
     //End game
     [SerializeField] GameObject EndScreen;
+
 
     private void Awake()
     {
@@ -207,8 +209,8 @@ public class GoalManager : MonoBehaviour
             {
                 if (image[imageListCounter].GetColor() != picture._PictureColour || image[imageListCounter].GetShape() != picture._PictureShape)
                 {
-                    Debug.Log($"Image: {image[imageListCounter].GetColor()} || {image[imageListCounter].GetShape()}");
-                    Debug.Log($"Criteria: {picture._PictureColour} || {picture._PictureShape} || {pictureObjectiveLeft.Count}");
+                    //Debug.Log($"Image: {image[imageListCounter].GetColor()} || {image[imageListCounter].GetShape()}");
+                    //Debug.Log($"Criteria: {picture._PictureColour} || {picture._PictureShape} || {pictureObjectiveLeft.Count}");
                     StartCoroutine(PlayerIncorrectImage(screenSide));
                     return false;
                 }
@@ -224,8 +226,8 @@ public class GoalManager : MonoBehaviour
         {
             if (image[imageListCounter].GetColor() != picture._PictureColour || image[imageListCounter].GetShape() != picture._PictureShape)
             {
-                Debug.Log($"Image: {image[imageListCounter].GetColor()} || {image[imageListCounter].GetShape()}") ;
-                Debug.Log($"Criteria: {picture._PictureColour} || {picture._PictureShape} || {pictureObjectiveRight.Count}");
+                //Debug.Log($"Image: {image[imageListCounter].GetColor()} || {image[imageListCounter].GetShape()}") ;
+                //Debug.Log($"Criteria: {picture._PictureColour} || {picture._PictureShape} || {pictureObjectiveRight.Count}");
                 StartCoroutine(PlayerIncorrectImage(screenSide));
                 return false;
             }
@@ -340,16 +342,39 @@ public class GoalManager : MonoBehaviour
             StartCoroutine(FireFloorObjects());
         }
     }
-    //8
-    private float waitTime = 8;
+
+    /*To Add: 
+    * Tutorial for creating canvas
+    * Tutorial for changing background colour
+    * Tutorial for creating shapes
+    * Tutorial for changing shape colour (ADD: not being able to change the background when there is a shape)
+    * Random time for preset customers (Set time, colour (indicate when it is short/mid/long timers)) */
+    private IEnumerator StartGame()
+    {
+        promptsText.text = $"Initalising Drawing Processor...";
+        yield return new WaitForSeconds(textWaitTime);
+        promptsText.text = $"Creator: Hello, Drawing Processor Unit!,";
+        yield return new WaitForSeconds(textWaitTime);
+        promptsText.text = $"Creator:";
+        yield return new WaitForSeconds(textWaitTime);
+    }
+    private IEnumerator TutorialCreateCanvas()
+    {
+        promptsText.text = $"Initalising Drawing Processor...";
+        yield return new WaitForSeconds(textWaitTime);
+        promptsText.text = $"Creator: Hello";
+        yield return new WaitForSeconds(textWaitTime);
+        promptsText.text = $"Creator: There will be some buttons that will send an error message to them and buy more time to buffer!";
+        yield return new WaitForSeconds(textWaitTime);
+    }
     private IEnumerator LeftFinishMachineInitalise()
     {
         promptsText.text = $"Creator: Well done! Looks like you fulfilled {completedImages} Users so far. The system efficiency can still be improved.";
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(textWaitTime);
         promptsText.text = $"Creator: I'm going to set the amount of users to 2. It will make it easier for the DPU to reach the {endGameGoal} quota!";
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(textWaitTime);
         promptsText.text = $"Creator: There will be some buttons that will send an error message to them and buy more time to buffer!";
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(textWaitTime);
         finishMachineAndButtons.SetActive(true);
         currentImageGoal = imageGoal2;
         InitaliseBothFinishLine();
@@ -357,11 +382,11 @@ public class GoalManager : MonoBehaviour
     private IEnumerator FireFloorObjects()
     {
         promptsText.text = $"Creator: Don't be alarm, but there has been a breach in our firewall. There is no estimated time of when it will be fixed so you will have to manage.";
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(textWaitTime);
         promptsText.text = $"Creator: The firewall in our system cannot detect properly detect threats and will slow down the system.";
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(textWaitTime);
         promptsText.text = $"Creator: On the brightside you completed {completedImages}! Well I'll leave the rest up to you.";
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(textWaitTime);
         promptsText.text = $"Creator has close this channel.";
         yield return new WaitForSeconds(3f);
         fireFloorObjects.SetActive(true);
